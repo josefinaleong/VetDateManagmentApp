@@ -21,7 +21,7 @@ function App() {
     } else {
       localStorage.setItem("dates",JSON.stringify([]))
     }
-  },[dates])
+  },[dates,initialDates])
 
   //Funcion que tome las citas actuales y agregue la nueva
   const createDate = (date)=>{

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from "prop-types"
 
 const Date = ({date,handleOnDelete}) => 
    (<div className="cita" >
@@ -15,5 +16,8 @@ const Date = ({date,handleOnDelete}) =>
      </button>
    </div> )
 
- 
+ Date.propTypes={
+   date: PropTypes.object.isRequired,
+   handleOnDelete: PropTypes.func.isRequired
+ }
 export default Date;

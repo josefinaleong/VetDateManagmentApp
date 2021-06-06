@@ -1,5 +1,6 @@
 import React, {Fragment,useState} from 'react';
 import uuid from "uuid/dist/v4"
+import PropTypes from "prop-types"
 
 
 const DateForm = ({createDate}) =>{
@@ -120,5 +121,7 @@ const DateForm = ({createDate}) =>{
   )
 }
 
-
+DateForm.propTypes = {
+  crearDate: PropTypes.func.isRequired
+}
 export default DateForm
