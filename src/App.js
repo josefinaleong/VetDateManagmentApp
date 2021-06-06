@@ -1,12 +1,27 @@
-import React,{Fragment,useState} from "react"
+import React,{Fragment,useState,useEffect} from "react"
 import DateForm from "./components/form/Form"
 import Date from "./components/date/Dates"
 
 
 
 function App() {
+
+  //Citas en localStorage
+  let initialDates= JSON.parse(localStorage.getItem("dates"))
+  if(!initialDates) {
+    initialDates = []
+  }
   //Crear state del listado de dates
-  const [dates,setDates]=useState([])
+  const [dates,setDates]=useState(initialDates)
+
+  //Use Effect para realizar ciertas operaciones cuando el state cambia
+  useEffect(()=>{
+    if(initialDates){
+      localStorage.setItem("dates",JSON.stringify(dates))
+    } else {
+      localStorage.setItem("dates",JSON.stringify([]))
+    }
+  },[dates])
 
   //Funcion que tome las citas actuales y agregue la nueva
   const createDate = (date)=>{
@@ -19,6 +34,8 @@ function App() {
     setDates(newDates)
   }
 
+  //Mensaje Condicional
+  const title = dates.length === 0 ? "NO DATES" : "Dates" 
 
   return (
     <Fragment>
@@ -28,10 +45,10 @@ function App() {
           <div className = "one-half column">
             <DateForm createDate={createDate}/>
           </div>
-          <div className = "one-half column">
-            <h2>Dates</h2>
+          <div className = "one-half column"> 
+            <h2>{title}</h2>
             {dates.map(date=>(
-              <Date key="date.id" date={date} handleOnDelete={handleOnDelete}/>
+              <Date key={date.id} date={date} handleOnDelete={handleOnDelete}/>
             ))}
           </div>
         </div>
