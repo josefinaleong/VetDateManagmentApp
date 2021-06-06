@@ -1,5 +1,7 @@
 import React,{Fragment,useState} from "react"
 import DateForm from "./components/form/Form"
+import Date from "./components/date/Dates"
+
 
 
 function App() {
@@ -10,6 +12,14 @@ function App() {
   const createDate = (date)=>{
     setDates([...dates,date])
   }
+
+  //Funcion que elimina una cita por su id
+  const handleOnDelete = id =>{
+    const newDates = dates.filter(cita=>cita.id !== id)
+    setDates(newDates)
+  }
+
+
   return (
     <Fragment>
       <h1>Veterinary Clinics Managment</h1>
@@ -19,7 +29,10 @@ function App() {
             <DateForm createDate={createDate}/>
           </div>
           <div className = "one-half column">
-            2
+            <h2>Dates</h2>
+            {dates.map(date=>(
+              <Date key="date.id" date={date} handleOnDelete={handleOnDelete}/>
+            ))}
           </div>
         </div>
 
